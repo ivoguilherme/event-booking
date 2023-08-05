@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:event_booking/common/storage_key.dart';
 import 'package:event_booking/features/onboarding_screen.dart';
-import 'package:event_booking/features/signup_screen.dart';
+import 'package:event_booking/features/signin_screen.dart';
 import 'package:event_booking/theme/image_source.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,9 +38,9 @@ class _SplashScreenState extends State<SplashScreen> {
             );
           }
 
-          if (snapshot.data == true) return const SignUpScreen();
-
-          return const OnBoardingScreen();
+          return (snapshot.data == true)
+              ? const SignInScreen()
+              : const OnBoardingScreen();
         });
   }
 }

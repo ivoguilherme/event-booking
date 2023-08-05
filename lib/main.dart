@@ -1,10 +1,12 @@
 import 'package:event_booking/features/splash_screen.dart';
+import 'package:event_booking/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: Home(),
+    MaterialApp(
+      home: const Home(),
+      theme: appTheme,
       debugShowCheckedModeBanner: false,
     ),
   );

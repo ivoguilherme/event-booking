@@ -1,5 +1,5 @@
 import 'package:event_booking/common/storage_key.dart';
-import 'package:event_booking/features/signup_screen.dart';
+import 'package:event_booking/features/signin_screen.dart';
 import 'package:event_booking/theme/colors.dart';
 import 'package:event_booking/theme/image_source.dart';
 import 'package:flutter/material.dart';
@@ -54,11 +54,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     await prefs.setBool(StorageKey.hideOnBOarding, true).then(onSuccess);
   }
 
-  void redirectSignUpScreen() {
-    Navigator.push(
+  void redirectSignInScreen() {
+    Navigator.pushReplacement(
         context,
         MaterialPageRoute<void>(
-          builder: (_) => const SignUpScreen(),
+          builder: (_) => const SignInScreen(),
         ));
   }
 
@@ -67,7 +67,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       return setState(() => _currentIndex += 1);
     }
 
-    await storeHideOnBoardingValue(onSuccess: (_) => redirectSignUpScreen());
+    await storeHideOnBoardingValue(onSuccess: (_) => redirectSignInScreen());
   }
 
   Widget dotsList() => Row(
@@ -140,7 +140,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextButton(
-                        onPressed: redirectSignUpScreen,
+                        onPressed: redirectSignInScreen,
                         child: const Text(
                           'Skip',
                           style: TextStyle(
