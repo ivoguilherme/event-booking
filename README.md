@@ -1,6 +1,6 @@
 # event_booking
 
-A new Flutter project.
+Event Booking is a study project.
 
 ## Getting Started
 
