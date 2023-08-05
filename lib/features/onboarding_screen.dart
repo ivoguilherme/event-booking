@@ -25,7 +25,7 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  int _idx = 0;
+  int _currentIndex = 0;
 
   final List<OnBoardingItem> items = [
     OnBoardingItem(
@@ -63,8 +63,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 
   Future<void> onNextPressed() async {
-    if (_idx < items.length - 1) {
-      return setState(() => _idx += 1);
+    if (_currentIndex < items.length - 1) {
+      return setState(() => _currentIndex += 1);
     }
 
     await storeHideOnBoardingValue(onSuccess: (_) => redirectSignUpScreen());
@@ -76,10 +76,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         children: List.generate(
           3,
           (index) => Container(
-            width: index == _idx ? 9 : 8,
-            height: index == _idx ? 9 : 8,
+            width: index == _currentIndex ? 9 : 8,
+            height: index == _currentIndex ? 9 : 8,
             decoration: BoxDecoration(
-              color: index == _idx
+              color: index == _currentIndex
                   ? const Color(0xFFFFFFFF)
                   : const Color(0x4FFFFFFF),
               borderRadius: BorderRadius.circular(4),
@@ -97,7 +97,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           Expanded(
               child: Padding(
             padding: const EdgeInsets.only(top: 20.0),
-            child: Image(image: items[_idx].image),
+            child: Image(image: items[_currentIndex].image),
           )),
           Container(
             decoration: const BoxDecoration(
@@ -114,7 +114,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
-                      items[_idx].title,
+                      items[_currentIndex].title,
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
