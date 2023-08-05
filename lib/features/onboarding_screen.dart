@@ -1,6 +1,5 @@
 import 'package:event_booking/common/storage_key.dart';
 import 'package:event_booking/features/signup_screen.dart';
-import 'package:event_booking/features/splash_screen.dart';
 import 'package:event_booking/theme/colors.dart';
 import 'package:event_booking/theme/image_source.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +48,28 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     )
   ];
 
+  Future<void> storeHideOnBoardingValue(
+      {required Function(bool) onSuccess}) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(StorageKey.hideOnBOarding, true).then(onSuccess);
+  }
+
+  void redirectSignUpScreen() {
+    Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (_) => const SignUpScreen(),
+        ));
+  }
+
+  Future<void> onNextPressed() async {
+    if (_idx < items.length - 1) {
+      return setState(() => _idx += 1);
+    }
+
+    await storeHideOnBoardingValue(onSuccess: (_) => redirectSignUpScreen());
+  }
+
   Widget dotsList() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,32 +87,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
         ),
       );
-
-  void backToSplashScreen() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const SplashScreen()));
-  }
-
-  Future<void> redirectSignUpScreen() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs
-        .setBool(StorageKey.hideOnBOarding, true)
-        .then((value) => Navigator.push(
-            context,
-            MaterialPageRoute<void>(
-              builder: (_) => const SignUpScreen(),
-            )));
-  }
-
-  Future<void> onNextPressed() async {
-    if (_idx < items.length - 1) {
-      return setState(() {
-        _idx += 1;
-      });
-    }
-
-    await redirectSignUpScreen();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,5 @@ class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const SplashScreen();
-  }
+  Widget build(BuildContext context) => const SplashScreen();
 }

@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 5));
 
     final prefs = await SharedPreferences.getInstance();
-    // prefs.clear();
+    prefs.clear();
     return prefs.getBool(StorageKey.hideOnBOarding) ?? false;
   }
 
@@ -39,9 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
             );
           }
 
-          if (snapshot.data == true) {
-            return const SignUpScreen();
-          }
+          if (snapshot.data == true) return const SignUpScreen();
 
           return const OnBoardingScreen();
         });
