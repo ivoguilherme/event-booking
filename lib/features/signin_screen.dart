@@ -13,17 +13,19 @@ class SignInScreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            children: [
-              Container(
-                height: 114,
-                margin: const EdgeInsets.only(bottom: 30),
-                child: Image.asset(
-                  ImageSource.mediumLogo,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: 114,
+                  margin: const EdgeInsets.only(bottom: 30),
+                  child: Image.asset(
+                    ImageSource.mediumLogo,
+                  ),
                 ),
-              ),
-              const SignInForm(),
-            ],
+                const SignInForm(),
+              ],
+            ),
           ),
         ),
       ),

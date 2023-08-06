@@ -1,5 +1,6 @@
+import 'package:event_booking/components/email_text_field.dart';
+import 'package:event_booking/components/password_text_field.dart';
 import 'package:event_booking/components/submit_button.dart';
-import 'package:event_booking/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class SignInForm extends StatefulWidget {
@@ -13,10 +14,16 @@ class SignInForm extends StatefulWidget {
 
 class SignInFormState extends State<SignInForm> {
   final _signInFormKey = GlobalKey<FormState>();
-  bool _visiblePassword = false;
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
+    void toggleVisiblePassword() {
+      setState(
+        () => _obscurePassword = !_obscurePassword,
+      );
+    }
+
     return Form(
       key: _signInFormKey,
       child: Column(
@@ -32,39 +39,13 @@ class SignInFormState extends State<SignInForm> {
               ),
             ),
           ),
-          TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            cursorColor: AppColors.primary,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(
-                Icons.alternate_email_rounded,
-                size: 22,
-              ),
-              labelText: 'emai@email.com',
-            ),
-          ),
+          const EmailTextField(),
           const SizedBox(
             height: 20,
           ),
-          TextFormField(
-            keyboardType: TextInputType.visiblePassword,
-            cursorColor: AppColors.primary,
-            obscureText: _visiblePassword,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
-                Icons.lock_outline_rounded,
-                size: 22,
-              ),
-              suffixIcon: IconButton(
-                onPressed: () => setState(
-                  () => _visiblePassword = !_visiblePassword,
-                ),
-                icon: Icon(
-                    _visiblePassword ? Icons.visibility_off : Icons.visibility),
-                color: AppColors.textFieldColor,
-              ),
-              labelText: 'Your password',
-            ),
+          PasswordTextField(
+            obscureText: _obscurePassword,
+            onPressed: toggleVisiblePassword,
           ),
           Container(
             margin: const EdgeInsets.only(
